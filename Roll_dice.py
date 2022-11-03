@@ -1,22 +1,29 @@
 import random
 
+VALUE1_DICE1 = 1
+VALUE2_DICE1 = 6
+VALUE1_DICE2 = 1
+VALUE2_DICE2 = 6
+COUNT = 100
 def roll_dice():
 
     num_simulations = 0
 
-    while num_simulations <= 100:
+    while num_simulations <= COUNT:
+        dice1 = random.randint(VALUE1_DICE1, VALUE2_DICE1)
+        dice2 = random.randint(VALUE1_DICE2, VALUE2_DICE2)
         num_simulations += 1
-        dice1 = random.randint(1, 6)
-        dice2 = random.randint(1, 6)
+        print(dice1, dice2)
         if dice1 == dice2:
-            print(dice1, dice2, f"You win")
+            msg = f"You won with sum {dice1 + dice2}"
         else:
-            print(dice1, dice2, f"Casino win")
-    return
+            msg = f"{dice1 + dice2} Casino wins"
+        return msg
+
 
 def main():
 
-    msg = (roll_dice())
-    print(msg)
+  game = roll_dice()
+  print(game)
 
 main()
