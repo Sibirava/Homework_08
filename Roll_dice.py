@@ -4,26 +4,26 @@ VALUE1_DICE1 = 1
 VALUE2_DICE1 = 6
 VALUE1_DICE2 = 1
 VALUE2_DICE2 = 6
-COUNT = 100
+NUMBER_TRIES = 10
 def roll_dice():
 
-    num_simulations = 0
-
-    while num_simulations <= COUNT:
+    results = []
+    count = 0
+    for i in range(0, NUMBER_TRIES):
         dice1 = random.randint(VALUE1_DICE1, VALUE2_DICE1)
         dice2 = random.randint(VALUE1_DICE2, VALUE2_DICE2)
-        num_simulations += 1
-        print(dice1, dice2)
         if dice1 == dice2:
-            msg = f"You won with sum {dice1 + dice2}"
-        else:
-            msg = f"{dice1 + dice2} Casino wins"
-        return msg
+            count += 1
+        results.append(dice1 + dice2)
+    return (results, count)
 
 
 def main():
 
-  game = roll_dice()
-  print(game)
+    results, count = roll_dice()
+
+    msg = f" In game there are such results {results}. Player won {count} time(s)"
+
+    print(msg)
 
 main()

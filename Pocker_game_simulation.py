@@ -1,37 +1,48 @@
 import random
-AMOUNT_PLAYERS = 5
 
-def form_table_cards(suits, cards_value):
+def form_card_deck():
+    card_deck = []
+    card = []
 
+    for i in ['Heart', 'Spade', 'Diamond', 'Club']:
+        for j in ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']:
+            card.append(i)
+            card.append(j)
+            card_deck.append(card)
+            card = []
+    return card_deck
+
+def form_table_cards(card_deck):
     table = []
 
-    for card in range(0, 2):
-        card = random.choice(suits), random.choice(cards_value)
+    for card in range(0, 5):
+        card = random.choice(card_deck)
         table.append(card)
+        card_deck.remove(card)
     return table
 
-def form_player_cards(suits, cards_value):
+def form_player_cards(card_deck,amount_players):
 
     player_cards = []
 
-    for player in range(1, AMOUNT_PLAYERS):
-        for card in range(0, 4):
-            card = random.choice(suits), random.choice(cards_value)
+    for i in range(0, amount_players):
+        for card in range(0, 2):
+            card = random.choice(card_deck)
             player_cards.append(card)
+            card_deck.remove(card)
     return player_cards
 
-
 def main():
-    suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
-    cards_value = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Lady", "King", "Ace"]
+    amount_players = int(input("Input the amount of players: "))
+    card_deck = form_card_deck()
 
-    table = form_table_cards(suits, cards_value)
-    players = form_player_cards(suits, cards_value)
+    table = form_table_cards(card_deck)
+    player_cards = form_player_cards(card_deck, amount_players)
 
-    msg = f"Poker game started \n " \
-          f"table cards are: {table}\n" \
-          f"Player's cards are {players}"
+    msg = f"Table cards: {table} \n" \
+          f"players_cards: {player_cards}"
+
     print(msg)
 
-main()
 
+main()
